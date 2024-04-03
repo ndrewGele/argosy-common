@@ -1,0 +1,10 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Environment
+.Renviron
+
+# Dumb MacOS Thing
+.DS_Store
