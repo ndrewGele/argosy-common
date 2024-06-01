@@ -24,23 +24,6 @@ get_all_data <- function(
     ) %>% 
     collect()
   
-  indicators_df <- db.con %>% 
-    tbl('indicators') %>% 
-    filter(
-      timestamp >= !!start.date,
-      timestamp <= !!end.date
-    ) %>% 
-    transmute(
-      symbol, 
-      date = date_trunc('day', timestamp), 
-      indicator, value
-    ) %>% 
-    collect() %>% 
-    tidyr::pivot_wider(
-      names_from = indicator,
-      values_from = value
-    )
-  
   macro_indicators_df <- db.con %>% 
     tbl('macro_indicators') %>% 
     filter(
@@ -58,11 +41,7 @@ get_all_data <- function(
     )
   
   df <- left_join(
-    ohlc_df,
-    indicators_df,
-    by = c('symbol', 'date')
-  ) %>% 
-    left_join(
+      ohlc_df,
       macro_indicators_df,
       by = 'date'
     ) %>% 
