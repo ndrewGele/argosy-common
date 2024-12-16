@@ -64,7 +64,7 @@ create_features <- function(data, feature.spec) {
       
       print(glue::glue('Generating feature: {x$name}'))
       df <- rlang::exec(
-        x$fun, 
+        eval(parse(text = x$fun)), 
         dplyr::select(df, x$cols), 
         unlist(x$args)
       )

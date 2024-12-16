@@ -1,6 +1,6 @@
 list(
   list(
-    fun = TTR::ADX,
+    fun = 'TTR::ADX',
     amount = c(0,2),
     cols = c('high', 'low', 'close'),
     args = list(
@@ -9,7 +9,7 @@ list(
     result = 'ADX'
   ),
   list(
-    fun = TTR::BBands,
+    fun = 'TTR::BBands',
     amount = c(0,2),
     cols = c('high', 'low', 'close'),
     args = list(
