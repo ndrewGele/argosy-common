@@ -92,6 +92,17 @@ tweak_feature_spec <- function(feature.spec, feature.def) {
 
   # Generate a fresh spec to combine in some way with given spec
   fresh_spec <- generate_feature_spec(feature.def)
+  
+  # We want to prevent the possibility of duplicating features, 
+  # so we'll make sure that none of the new features match the old features
+  existing_names <- feature.spec |> purrr::map_chr(purrr::pluck, 'name')
+  fresh_names <- fresh_spec |> purrr::map_chr(purrr::pluck, 'name')
+  
+  while(any(fresh_names %in% existing_names)) {
+    fresh_spec <- generate_feature_spec(feature.def)
+    fresh_names <- fresh_spec |> purrr::map_chr(purrr::pluck, 'name')
+  }
+  
   print(glue::glue('Length of fresh spec: {length(fresh_spec)}'))
   
   # Create table of all valid operations
