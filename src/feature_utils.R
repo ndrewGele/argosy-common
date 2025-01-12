@@ -53,6 +53,7 @@ generate_feature_spec <- function(feature.def) {
 create_features <- function(data, feature.spec) {
   
   if(is.null(feature.spec)) return(NULL)
+  if(length(feature.spec) == 0) return(NULL)
   
   df <- dplyr::rename_with(data, tolower)
   
