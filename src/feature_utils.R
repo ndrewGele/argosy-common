@@ -44,6 +44,8 @@ generate_feature_spec <- function(feature.def) {
     } # end of map fn
   ) # end of outer map
   
+  # Here we alphabetize the features because hashing the same feature set in a 
+  # different order probably results in a different hash
   res <- unname(unlist(res, recursive = FALSE))
   res <- res[order(purrr::map_chr(.x = res, .f = purrr::pluck, 'name'))]
   return(res)
